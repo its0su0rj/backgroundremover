@@ -1,1 +1,1 @@
-web: streamlit run chat.py
+web: streamlit run app.py
