@@ -4,11 +4,8 @@ import streamlit as st
 import os
 import base64
 
-def remove_background(input_image_path, output_image_path):
-    with open(input_image_path, "rb") as f:
-        input_image = f.read()
-
-    output_image = rembg.remove(input_image)
+def remove_background(input_image_content, output_image_path):
+    output_image = rembg.remove(input_image_content)
 
     with open(output_image_path, "wb") as f:
         f.write(output_image)
@@ -26,8 +23,8 @@ def main():
         os.makedirs(output_image_dir, exist_ok=True)
         output_image_path = os.path.join(output_image_dir, "output_image.png")
 
-        remove_background(uploaded_file, output_image_path)
-        
+        remove_background(uploaded_file.read(), output_image_path)  # Pass the file content
+
         # Display the output image
         st.image(output_image_path, caption="Background Removed Image", use_column_width=True)
 
